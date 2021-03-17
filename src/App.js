@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import AddTask from "./AddTask";
+import "./App.css";
+import { store } from "./store";
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const styles = () => ({
+  root: {
+    padding: 10,
+    backgroundColor: "#f5f5f5",
+    height: "100vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
+
+class App extends React.Component {
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <Provider store={store}>
+        <div className={classes.root}>
+          <div style={{minWidth: 500}}>
+            <Card>
+              <CardContent >
+                <AddTask />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </Provider>
+    );
+  }
 }
 
-export default App;
+export default withStyles(styles)(App);
